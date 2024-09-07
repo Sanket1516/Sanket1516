@@ -19,7 +19,7 @@ Here are some ideas to get you started:
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=sanket1516&label=Profile%20views&color=0e75b6&style=flat" alt="sanket1516" /> </p>
 
-- 🌱 I’m currently learning **Digital Marketing.**
+- 🌱 I’m currently learning **Data Science**
 
 - 📝 I regularly write articles on [sankethabitbuilding.blogspot.com](sankethabitbuilding.blogspot.com)
 
