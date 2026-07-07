@@ -184,9 +184,11 @@ Full-stack quiz management portal built during internship with responsive fronte
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/github-contribution-grid-snake-dark.svg" width="100%"/>
-
-<sub>⚡ Add the <a href="https://github.com/Platane/snk">Platane/snk</a> Action to the <code>Sanket1516/Sanket1516</code> repo to activate this.</sub>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/github-contribution-grid-snake.svg">
+  <img alt="GitHub Contribution Snake" src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/github-contribution-grid-snake.svg" width="100%">
+</picture>
 
 </div>
 
