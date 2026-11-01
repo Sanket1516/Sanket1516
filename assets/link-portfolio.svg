@@ -1,20 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="280" height="68" viewBox="0 0 280 68" fill="none" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="96" viewBox="0 0 300 96" fill="none" role="img" aria-labelledby="t d">
 <title id="t">Portfolio</title><desc id="d">SANKETMALI.DEV</desc>
 <defs>
-  <linearGradient id="lglobe-brand" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox" spreadMethod="reflect">
+  <pattern id="pg-pd" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="translate(0 0)"><circle cx="1" cy="1" r="1" fill="#252D40"/></pattern>
+  <radialGradient id="pg-gc"><stop offset="0" stop-color="#22D3EE" stop-opacity=".16"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
+  <radialGradient id="pg-gv"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".2"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="pg-gb"><stop offset="0" stop-color="#3B82F6" stop-opacity=".16"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
+  <linearGradient id="pg-sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22D3EE" stop-opacity="0"/><stop offset=".85" stop-color="#22D3EE" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient>
+  <linearGradient id="pg-rl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22D3EE" stop-opacity=".8"/><stop offset=".5" stop-color="#3B82F6" stop-opacity=".7"/><stop offset="1" stop-color="#8B5CF6" stop-opacity=".8"/></linearGradient></defs><g><rect width="300" height="96" fill="#05060A"/><rect width="300" height="96" fill="url(#pg-pd)" opacity=".5"/><defs>
+  <linearGradient id="c2-brand" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox" spreadMethod="reflect">
     <stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#3B82F6"/><stop offset="1" stop-color="#8B5CF6"/>
   </linearGradient>
-  <linearGradient id="lglobe-brandv" x1="0" y1="0" x2="0" y2="1">
+  <linearGradient id="c2-brandv" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/>
   </linearGradient>
-  <linearGradient id="lglobe-edge" x1="0" y1="0" x2="1" y2="1">
+  <linearGradient id="c2-edge" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#22D3EE" stop-opacity=".55"/><stop offset=".35" stop-color="#252D40" stop-opacity=".9"/>
     <stop offset=".7" stop-color="#1A2030"/><stop offset="1" stop-color="#8B5CF6" stop-opacity=".5"/>
   </linearGradient>
-  <radialGradient id="lglobe-glowc" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
-  <radialGradient id="lglobe-glowv" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
-  <radialGradient id="lglobe-glowb" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3B82F6" stop-opacity=".2"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
-  <pattern id="lglobe-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#252D40"/></pattern>
-  <pattern id="lglobe-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#1A2030" stroke-width="1"/></pattern>
-</defs><rect x="0.5" y="0.5" width="279" height="67" rx="18" fill="#0A0D14" stroke="url(#lglobe-edge)"/><rect x="14.5" y="14.5" width="39" height="39" rx="11" fill="#0F131D" stroke="#252D40"/><g transform="translate(23 23) scale(0.9166666666666666)" color="#EEF2F8"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19" fill="none" stroke="currentColor" stroke-width="1.6"/></g><text x="68" y="32" font-family="'Segoe UI Variable Display','Segoe UI',Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="0" fill="#EEF2F8" text-anchor="start">Portfolio</text><text x="68" y="52" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="11.5" font-weight="500" letter-spacing="1" fill="#667089" text-anchor="start">SANKETMALI.DEV</text><text x="258" y="42" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="18" fill="#22D3EE" text-anchor="end">↗</text>
+  <radialGradient id="c2-glowc" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
+  <radialGradient id="c2-glowv" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="c2-glowb" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3B82F6" stop-opacity=".2"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
+  <pattern id="c2-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#252D40"/></pattern>
+  <pattern id="c2-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#1A2030" stroke-width="1"/></pattern>
+</defs><rect x="16.5" y="16.5" width="251" height="63" rx="16" fill="#0A0D14" stroke="url(#c2-edge)"/><rect x="28.5" y="28.5" width="39" height="39" rx="11" fill="#0F131D" stroke="#252D40"/><g transform="translate(37 37) scale(0.9166666666666666)" color="#EEF2F8"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19" fill="none" stroke="currentColor" stroke-width="1.6"/></g><text x="82" y="46" font-family="'Segoe UI Variable Display','Segoe UI',Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="0" fill="#EEF2F8" text-anchor="start">Portfolio</text><text x="82" y="65" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="11" font-weight="500" letter-spacing="1" fill="#667089" text-anchor="start">SANKETMALI.DEV</text><text x="250" y="56" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="18" fill="#22D3EE" text-anchor="end">↗</text></g>
 </svg>

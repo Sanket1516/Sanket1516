@@ -2,19 +2,23 @@
 //   npm install && npm run build
 // Icons are inlined from the `simple-icons` package so the README never
 // depends on a third-party icon CDN at render time.
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readdirSync, unlinkSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as si from 'simple-icons';
 import {
   C, FONT, T, svg, defs, card, label, text, chips, packet, led, para, monoW, esc,
+  PAGE, snap, nest, strip, pageGlows,
 } from './design.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'assets');
 mkdirSync(OUT, { recursive: true });
+for (const f of readdirSync(OUT)) if (f.endsWith('.svg') || f.endsWith('.json')) unlinkSync(join(OUT, f));
 const files = {};
-const emit = (name, content) => { files[name] = content; writeFileSync(join(OUT, name), content.replace(/\n\s*\n/g, '\n')); };
+const emit = (name, content) => { files[name] = content; };
+const written = {};
+const out = (name, content) => { const c = content.replace(/\n\s*\n/g, '\n'); written[name] = c; writeFileSync(join(OUT, name), c); };
 
 // ── icons ────────────────────────────────────────────────────────────────────
 const CUSTOM = { // hand-drawn 24×24 glyphs for tools simple-icons doesn't ship
@@ -107,7 +111,7 @@ const DOC = [
 //  HERO
 // ═════════════════════════════════════════════════════════════════════════════
 function hero() {
-  const W = 1200, H = 620, p = 'h';
+  const W = 1200, H = 624, p = 'h';
   const cx = 948, cy = 300;
   const ell = (rx, ry) => `M${-rx} 0a${rx} ${ry} 0 1 0 ${2 * rx} 0a${rx} ${ry} 0 1 0 ${-2 * rx} 0`;
   const orbits = [
@@ -124,16 +128,14 @@ function hero() {
   const hex = (r) => Array.from({ length: 6 }, (_, i) => { const a = Math.PI / 6 + i * Math.PI / 3; return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`; }).join(' ');
 
   let b = defs(p, { animateBrand: true });
-  b += `<clipPath id="h-clip"><rect x="0" y="0" width="${W}" height="${H}" rx="28"/></clipPath>`;
+  b += `<clipPath id="h-clip"><path d="M0 28Q0 0 28 0H${W - 28}Q${W} 0 ${W} 28V${H}H0Z"/></clipPath>`;
   b += `<g clip-path="url(#h-clip)"><rect width="${W}" height="${H}" fill="${C.void}"/>`;
   b += `<rect width="${W}" height="${H}" fill="url(#h-dots)" opacity=".55"/>`;
   b += `<g><circle cx="220" cy="140" r="420" fill="url(#h-glowc)"/><animateTransform attributeName="transform" type="translate" values="0 0;40 26;0 0" dur="${T.slow}s" repeatCount="indefinite"/></g>`;
-  b += `<g><circle cx="${cx}" cy="${cy}" r="360" fill="url(#h-glowv)"/><animateTransform attributeName="transform" type="translate" values="0 0;-30 18;0 0" dur="${T.slow * 1.3}s" repeatCount="indefinite"/></g>`;
-  b += `<circle cx="560" cy="640" r="300" fill="url(#h-glowb)"/>`;
+  b += `<g><circle cx="${cx}" cy="${cy}" r="300" fill="url(#h-glowv)"/><animateTransform attributeName="transform" type="translate" values="0 0;-30 18;0 0" dur="${T.slow * 1.3}s" repeatCount="indefinite"/></g>`;
   // horizon scanline — the page's signature "signal" sweeping the canvas
   b += `<rect x="0" y="0" width="${W}" height="2" fill="url(#h-brand)" opacity=".22"><animate attributeName="y" values="-10;${H + 10}" dur="${T.drift}s" repeatCount="indefinite"/></rect>`;
   b += '</g>';
-  b += `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="28" stroke="url(#h-edge)"/>`;
 
   // top bar
   b += led(78, 58, C.mint, 4.5);
@@ -200,20 +202,19 @@ function hero() {
 // ═════════════════════════════════════════════════════════════════════════════
 //  SECTION HEADER  (module bar with an index, title and a travelling packet)
 // ═════════════════════════════════════════════════════════════════════════════
-function header(file, idx, title, cmd) {
-  const W = 1200, H = 116, p = 's' + idx;
+function headerBody(idx, title, cmd) {
+  // drawn straight onto the page surface — no box — so it reads as a heading
+  const p = 'hd' + idx, M = PAGE.M, R = PAGE.W - PAGE.M;
   let b = defs(p);
-  b += card(p, 0, 0, W, H, { ticks: false, r: 20 });
-  b += `<text x="40" y="78" font-family="${FONT.mono}" font-size="44" font-weight="700" fill="none" stroke="url(#${p}-brand)" stroke-width="1.4" textLength="58" lengthAdjust="spacingAndGlyphs">${idx}</text>`;
-  b += `<path d="M120 30V86" stroke="${C.line2}"/>`;
-  b += label(146, 46, `SECTION ${idx}`, { size: 13, color: C.cyan });
-  b += text(144, 86, title, { size: 34, weight: 750 });
-  b += label(W - 40, 46, cmd, { size: 13, anchor: 'end', color: C.mute, spacing: 1 });
-  b += `<path d="M560 78H${W - 40}" stroke="${C.line2}" stroke-dasharray="2 6"/>`;
-  [0, 1, 2, 3].forEach((i) => b += `<circle cx="${560 + i * ((W - 600) / 3)}" cy="78" r="3" fill="${C.panel2}" stroke="${C.mute}"/>`);
-  b += packet(`M560 78H${W - 40}`, { dur: T.pulse * 1.4, color: C.cyan });
-  b += packet(`M560 78H${W - 40}`, { dur: T.pulse * 1.4, begin: T.pulse * 0.7, color: C.violet, r: 2.4 });
-  emit(file, svg(W, H, b, { title: `${idx} — ${title}`, desc: cmd }));
+  b += `<text x="${M}" y="104" font-family="${FONT.mono}" font-size="54" font-weight="700" fill="none" stroke="url(#${p}-brand)" stroke-width="1.4" textLength="70" lengthAdjust="spacingAndGlyphs">${idx}</text>`;
+  b += `<path d="M${M + 96} 54V108" stroke="${C.line2}"/>`;
+  b += label(M + 120, 68, `SECTION ${idx}`, { size: 13, color: C.cyan });
+  b += text(M + 118, 106, title, { size: 40, weight: 800, spacing: -0.6 });
+  b += label(R, 68, cmd, { size: 13, anchor: 'end', color: C.mute, spacing: 1 });
+  b += `<path d="M${M} 130H${R}" stroke="${C.line}"/>`;
+  b += `<path d="M${M} 130H${M + 220}" stroke="url(#${p}-brand)" stroke-width="2"/>`;
+  b += packet(`M${M} 130H${R}`, { dur: T.pulse * 1.6, color: C.cyan, r: 2.4 });
+  return b;
 }
 
 // ═════════════════════════════════════════════════════════════════════════════
@@ -557,69 +558,100 @@ function stack() {
 }
 
 // ═════════════════════════════════════════════════════════════════════════════
-//  LINK CHIPS, DIVIDER, FOOTER
+//  LINK CHIPS + FOOTER (page-surface bodies)
 // ═════════════════════════════════════════════════════════════════════════════
-function linkChip(file, slug, name, hint) {
-  const W = 280, H = 68, p = 'l' + slug;
-  let b = defs(p);
-  b += card(p, 0, 0, W, H, { ticks: false, r: 18 });
-  b += `<rect x="14.5" y="14.5" width="39" height="39" rx="11" fill="${C.panel2}" stroke="${C.line2}"/>`;
-  b += icon(slug, 23, 23, 22, C.text);
-  b += text(68, 32, name, { size: 19, weight: 700 });
-  b += label(68, 52, hint, { size: 11.5, spacing: 1 });
-  b += `<text x="${W - 22}" y="42" font-family="${FONT.mono}" font-size="18" fill="${C.cyan}" text-anchor="end">↗</text>`;
-  emit(file, svg(W, H, b, { title: name, desc: hint }));
-}
 CUSTOM.mail = '<rect x="2" y="5" width="20" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 7 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>';
 CUSTOM.globe = '<circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19" fill="none" stroke="currentColor" stroke-width="1.6"/>';
 CUSTOM.paper = '<path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 2v6h6M9 13h8M9 17h6" fill="none" stroke="currentColor" stroke-width="2"/>';
 
-function divider() {
-  const W = 1200, H = 40, p = 'dv';
+function chipBody(x, y, w, slug, name, hint, p) {
+  const H = 64;
   let b = defs(p);
-  b += `<path d="M0 20H${W}" stroke="${C.line2}" stroke-dasharray="1 7"/>`;
-  [0.25, 0.5, 0.75].forEach((f) => b += `<rect x="${W * f - 4}" y="16" width="8" height="8" transform="rotate(45 ${W * f} 20)" fill="${C.panel2}" stroke="${C.mute}"/>`);
-  b += packet(`M0 20H${W}`, { dur: T.drift / 2, color: C.cyan });
-  b += packet(`M${W} 20H0`, { dur: T.drift / 2, begin: T.drift / 4, color: C.violet, r: 2.4 });
-  emit('divider.svg', svg(W, H, b, { title: 'divider', desc: 'animated packet trace' }));
+  b += card(p, x, y, w, H, { ticks: false, r: 16 });
+  b += `<rect x="${x + 12.5}" y="${y + 12.5}" width="39" height="39" rx="11" fill="${C.panel2}" stroke="${C.line2}"/>`;
+  b += icon(slug, x + 21, y + 21, 22, C.text);
+  b += text(x + 66, y + 30, name, { size: 19, weight: 700 });
+  b += label(x + 66, y + 49, hint, { size: 11, spacing: 1 });
+  b += `<text x="${x + w - 18}" y="${y + 40}" font-family="${FONT.mono}" font-size="18" fill="${C.cyan}" text-anchor="end">↗</text>`;
+  return b;
 }
 
-function footer() {
-  const W = 1200, H = 300, p = 'f';
+function footerBody(H) {
+  const W = PAGE.W, p = 'f';
   let b = defs(p, { animateBrand: true });
-  b += `<clipPath id="f-clip"><rect width="${W}" height="${H}" rx="28"/></clipPath>`;
-  b += `<g clip-path="url(#f-clip)"><rect width="${W}" height="${H}" fill="${C.void}"/><rect width="${W}" height="${H}" fill="url(#f-dots)" opacity=".5"/>`;
-  b += `<circle cx="${W / 2}" cy="${H + 40}" r="420" fill="url(#f-glowv)"/><circle cx="${W / 2}" cy="${H + 60}" r="260" fill="url(#f-glowc)"/></g>`;
-  b += `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="28" stroke="url(#f-edge)"/>`;
-  b += label(W / 2, 58, 'END OF TRANSMISSION', { size: 13, anchor: 'middle', color: C.mute, spacing: 4 });
-  // signature — the name is drawn as a stroke, then filled
+  b += `<circle cx="${W / 2}" cy="${H + 40}" r="300" fill="url(#f-glowv)"/><circle cx="${W / 2}" cy="${H + 60}" r="220" fill="url(#f-glowc)"/>`;
+  b += label(W / 2, 96, 'END OF TRANSMISSION', { size: 13, anchor: 'middle', color: C.mute, spacing: 4 });
   const sig = `font-family="${FONT.sans}" font-size="84" font-weight="300" font-style="italic" letter-spacing="-1" text-anchor="middle" textLength="520" lengthAdjust="spacingAndGlyphs"`;
-  b += `<text x="${W / 2}" y="158" ${sig} fill="url(#f-brand)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.32;.45;.92;1" dur="9s" repeatCount="indefinite"/>Sanket Mali</text>`;
-  b += `<text x="${W / 2}" y="158" ${sig} fill="none" stroke="url(#f-brand)" stroke-width="1.2" stroke-dasharray="1400" stroke-dashoffset="1400"><animate attributeName="stroke-dashoffset" values="1400;0;0;1400" keyTimes="0;.38;.92;1" dur="9s" repeatCount="indefinite"/>Sanket Mali</text>`;
-  b += `<path d="M${W / 2 - 230} 184H${W / 2 + 230}" stroke="${C.line2}"/>`;
-  b += packet(`M${W / 2 - 230} 184H${W / 2 + 230}`, { dur: T.pulse, color: C.cyan, r: 2.4 });
-  b += text(W / 2, 222, 'Thanks for stopping by — let’s build something that scales.', { size: 20, color: C.dim, anchor: 'middle', weight: 500 });
-  b += label(W / 2, 262, 'HAND-BUILT SVG · SMIL ANIMATION · REGENERATED BY GITHUB ACTIONS', { size: 11.5, anchor: 'middle', color: C.mute, spacing: 2 });
-  emit('footer.svg', svg(W, H, b, { title: 'Signature — Sanket Mali', desc: 'Animated hand-drawn signature footer.' }));
+  b += `<text x="${W / 2}" y="190" ${sig} fill="url(#f-brand)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.32;.45;.92;1" dur="9s" repeatCount="indefinite"/>Sanket Mali</text>`;
+  b += `<text x="${W / 2}" y="190" ${sig} fill="none" stroke="url(#f-brand)" stroke-width="1.2" stroke-dasharray="1400" stroke-dashoffset="1400"><animate attributeName="stroke-dashoffset" values="1400;0;0;1400" keyTimes="0;.38;.92;1" dur="9s" repeatCount="indefinite"/>Sanket Mali</text>`;
+  b += `<path d="M${W / 2 - 230} 216H${W / 2 + 230}" stroke="${C.line2}"/>`;
+  b += packet(`M${W / 2 - 230} 216H${W / 2 + 230}`, { dur: T.pulse, color: C.cyan, r: 2.4 });
+  b += text(W / 2, 256, 'Thanks for stopping by — let’s build something that scales.', { size: 20, color: C.dim, anchor: 'middle', weight: 500 });
+  b += label(W / 2, 296, 'B.TECH CSE · NMIMS MPSTME · SHIRPUR, INDIA', { size: 11.5, anchor: 'middle', color: C.mute, spacing: 2 });
+  return b;
 }
 
-// ── run ──────────────────────────────────────────────────────────────────────
-hero();
-header('section-01.svg', '01', 'whoami', '$ cat ~/about.md');
-header('section-02.svg', '02', 'Selected work', '$ ls ~/projects --sort=impact');
-header('section-03.svg', '03', 'Technology ecosystem', '$ tree ~/stack -L 2');
-header('section-04.svg', '04', 'Telemetry', '$ watch -n 12h github --stats');
-header('section-05.svg', '05', 'Signal trace', '$ snake --eat ~/contributions');
-about();
-smartCampus(); smartForm(); dpi(); metromind(); passguard(); wanderlust();
-stack();
-linkChip('link-linkedin.svg', 'linkedin', 'LinkedIn', 'CONNECT');
-linkChip('link-email.svg', 'mail', 'Email', 'SANKETMALI0909');
-linkChip('link-portfolio.svg', 'globe', 'Portfolio', 'SANKETMALI.DEV');
-linkChip('link-paper.svg', 'paper', 'IEEE paper', 'DELCON 2025');
-divider();
-footer();
+// ═════════════════════════════════════════════════════════════════════════════
+//  PAGE ASSEMBLY — stack strips top-to-bottom with zero gap
+// ═════════════════════════════════════════════════════════════════════════════
+hero(); about(); smartCampus(); smartForm(); dpi(); metromind(); passguard(); wanderlust(); stack();
 
-const total = Object.values(files).reduce((s, f) => s + Buffer.byteLength(f), 0);
-console.log(Object.entries(files).map(([k, v]) => `${k.padEnd(28)} ${(Buffer.byteLength(v) / 1024).toFixed(1)} kB`).join('\n'));
-console.log(`— ${Object.keys(files).length} files, ${(total / 1024).toFixed(1)} kB total`);
+const { W, M } = PAGE, CW = W - 2 * M; // content width inside page margins
+const STATS_H = 696, SNAKE_H = 336, FOOT_H = 336;
+const plan = []; // [{ name, x0, w, h, kind, ... }] rows share y
+let y = 0; const rows = [];
+const row = (h, parts) => { rows.push({ y, h, parts }); y += h; };
+const full = (name, h, extra = {}) => row(h, [{ name, x0: 0, w: W, ...extra }]);
+const content = (name, src) => { const h = snap(nest(files[src], M, 0, CW).h + 24); full(name, h, { src }); };
+
+full('hero.svg', 624, { raw: 'hero.svg' });
+row(96, [
+  ['linkedin', 'LinkedIn', 'CONNECT', 'link-linkedin.svg'], ['mail', 'Email', 'SANKETMALI0909', 'link-email.svg'],
+  ['globe', 'Portfolio', 'SANKETMALI.DEV', 'link-portfolio.svg'], ['paper', 'IEEE paper', 'DELCON 2025', 'link-paper.svg'],
+].map(([slug, n, hint, name], i) => ({ name, x0: i * 300, w: 300, chip: [slug, n, hint, i] })));
+const heads = [['01', 'whoami', '$ cat ~/about.md'], ['02', 'Selected work', '$ ls ~/projects --sort=impact'],
+  ['03', 'Technology ecosystem', '$ tree ~/stack -L 2'], ['04', 'Telemetry', '$ watch -n 12h github --stats'], ['05', 'Signal trace', '$ snake --eat ~/contributions']];
+const head = (i) => full(`head-${heads[i][0]}.svg`, 144, { head: heads[i] });
+head(0); content('about.svg', 'about.svg');
+head(1); content('project-smart-campus.svg', 'project-smart-campus.svg');
+// paired cards: two images side by side, gutter baked into the art
+const s = CW / (748 + 468); const pairH = snap(580 * s + 24); const wide = M + 748 * s;
+row(pairH, [{ name: 'project-smart-form.svg', x0: 0, w: wide, src: 'project-smart-form.svg', at: M }, { name: 'project-dpi.svg', x0: wide, w: W - wide, src: 'project-dpi.svg', at: 0 }]);
+row(pairH, [{ name: 'project-metromind.svg', x0: 0, w: W - wide, src: 'project-metromind.svg', at: M }, { name: 'project-passguard.svg', x0: W - wide, w: wide, src: 'project-passguard.svg', at: 0 }]);
+content('project-wanderlust.svg', 'project-wanderlust.svg');
+head(2); content('stack.svg', 'stack.svg');
+head(3); const statsY = y; row(STATS_H, [{ name: null, x0: 0, w: W, external: 'stats' }]);
+head(4); const snakeY = y; row(SNAKE_H, [{ name: null, x0: 0, w: W, external: 'snake' }]);
+full('footer.svg', FOOT_H, { foot: true });
+const totalH = y;
+const glows = pageGlows(totalH);
+
+rows.forEach((r, ri) => r.parts.forEach((pt, pi) => {
+  if (!pt.name) return;
+  const common = { x0: pt.x0, y0: r.y, w: pt.w, h: r.h, glows, id: 'pg', seed: ri * 7 + pi + 1 };
+  let svgOut;
+  if (pt.raw) svgOut = files[pt.raw];
+  else if (pt.chip) {
+    const [slug, n, hint, i] = pt.chip;
+    svgOut = strip({ ...common, railFrom: 0, node: i === 0 ? 48 : undefined, streaks: 1,
+      body: chipBody(M - 16 * i, 16, 252, slug, n, hint, 'c' + i), title: n, desc: hint });
+  } else if (pt.head) {
+    svgOut = strip({ ...common, node: 98, streaks: 2, body: headerBody(...pt.head), title: `${pt.head[0]} — ${pt.head[1]}`, desc: pt.head[2] });
+  } else if (pt.foot) {
+    svgOut = strip({ ...common, round: 'bottom', railTo: 40, node: 40, streaks: 3, body: footerBody(r.h), title: 'Signature — Sanket Mali', desc: 'Thanks for stopping by.' });
+  } else {
+    const at = pt.at ?? M; const wNest = pt.src.startsWith('project-smart-form') || pt.src.startsWith('project-passguard') ? 748 * s : pt.src.startsWith('project-dpi') || pt.src.startsWith('project-metromind') ? 468 * s : CW;
+    const n = nest(files[pt.src], at, 0, wNest);
+    const t = files[pt.src].match(/<title id="t">([\s\S]*?)<\/title>/)[1];
+    svgOut = strip({ ...common, body: n.el, title: t, desc: '' });
+  }
+  out(pt.name, svgOut);
+}));
+
+// layout handed to the workflow scripts so live strips line up with the rest
+const layout = { totalH, glows, stats: { y: statsY, h: STATS_H }, snake: { y: snakeY, h: SNAKE_H },
+  pairPct: { wide: +(wide / W * 100).toFixed(2), narrow: +((W - wide) / W * 100 - 0.01).toFixed(2) } };
+writeFileSync(join(OUT, 'layout.json'), JSON.stringify(layout));
+const total = Object.values(written).reduce((a, f) => a + Buffer.byteLength(f), 0);
+console.log(Object.entries(written).map(([k, v]) => `${k.padEnd(30)} ${(Buffer.byteLength(v) / 1024).toFixed(1)} kB`).join('\n'));
+console.log(`— ${Object.keys(written).length} files, ${(total / 1024).toFixed(1)} kB · page height ${totalH} · pair widths ${layout.pairPct.wide}% / ${layout.pairPct.narrow}%`);

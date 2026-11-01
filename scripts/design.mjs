@@ -126,3 +126,78 @@ export function wrap(str, max) {
 export function para(x, y, str, { max = 50, size = 20, lh = 1.5, color = C.dim, weight = 400, family = FONT.sans } = {}) {
   return wrap(str, max).map((l, i) => text(x, y + i * size * lh, l, { size, color, weight, family })).join('');
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  PAGE — the README is assembled from horizontal "strips" stacked with zero
+//  gap. Every strip shares one background (same colour, a 24-unit dot grid
+//  that lines up across seams, static page-level glows, falling light
+//  streaks) and the left "spine" rail, so the page reads as one surface.
+//  All strips are drawn in a 1200-unit page coordinate space; strip heights
+//  are multiples of the grid so the dots stay aligned from top to bottom.
+// ─────────────────────────────────────────────────────────────────────────────
+export const PAGE = { W: 1200, M: 48, RAIL: 24, GRID: 24, BG: C.void };
+export const snap = (h) => Math.ceil(h / PAGE.GRID - 1e-9) * PAGE.GRID;
+
+// Embed a finished SVG document inside a strip, scaled to width `w`.
+export function nest(svgStr, x, y, w) {
+  const open = svgStr.match(/<svg\b[^>]*>/)[0];
+  const vb = open.match(/viewBox="([-\d.]+)[ ,]+([-\d.]+)[ ,]+([\d.]+)[ ,]+([\d.]+)"/);
+  const [vx, vy, W, H] = vb.slice(1).map(Number);
+  const h = w * H / W;
+  const body = svgStr.slice(svgStr.indexOf(open) + open.length).replace(/<\/svg>\s*$/, '')
+    .replace(/<title id="t">[\s\S]*?<\/title>/, '').replace(/<desc id="d">[\s\S]*?<\/desc>/, '');
+  return { el: `<svg x="${x}" y="${y}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" viewBox="${vx} ${vy} ${W} ${H}">${body}</svg>`, h };
+}
+
+// Page-level ambient light: static (so seams between images stay invisible)
+// glows parked just off the left/right edges, alternating colour.
+export function pageGlows(totalH) {
+  const out = []; const cols = ['c', 'v', 'b'];
+  for (let y = 1000, i = 0; y < totalH + 400; y += 760, i++) out.push([i % 2 ? PAGE.W + 90 : -90, y, 540, cols[i % 3]]);
+  return out;
+}
+
+function rng(seed) { let s = seed * 9301 + 49297; return () => ((s = (s * 16807) % 2147483647) / 2147483647); }
+
+export function strip({ x0 = 0, y0 = 0, w = PAGE.W, h, body = '', title = '', desc = '', glows = [], rail = true,
+  railFrom = 0, railTo, node, round, id = 'pg', streaks = 3, seed = 1 }) {
+  const r = 28;
+  let d = `<defs>
+  <pattern id="${id}-pd" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="translate(${-(x0 % 24)} 0)"><circle cx="1" cy="1" r="1" fill="${C.line2}"/></pattern>
+  <radialGradient id="${id}-gc"><stop offset="0" stop-color="${C.cyan}" stop-opacity=".16"/><stop offset="1" stop-color="${C.cyan}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="${id}-gv"><stop offset="0" stop-color="${C.violet}" stop-opacity=".2"/><stop offset="1" stop-color="${C.violet}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="${id}-gb"><stop offset="0" stop-color="${C.blue}" stop-opacity=".16"/><stop offset="1" stop-color="${C.blue}" stop-opacity="0"/></radialGradient>
+  <linearGradient id="${id}-sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.cyan}" stop-opacity="0"/><stop offset=".85" stop-color="${C.cyan}" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient>
+  <linearGradient id="${id}-rl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.cyan}" stop-opacity=".8"/><stop offset=".5" stop-color="${C.blue}" stop-opacity=".7"/><stop offset="1" stop-color="${C.violet}" stop-opacity=".8"/></linearGradient>`;
+  const clip = round === 'top' ? `M0 ${r}Q0 0 ${r} 0H${w - r}Q${w} 0 ${w} ${r}V${h}H0Z`
+    : round === 'bottom' ? `M0 0H${w}V${h - r}Q${w} ${h} ${w - r} ${h}H${r}Q0 ${h} 0 ${h - r}Z` : null;
+  if (clip) d += `<clipPath id="${id}-clip"><path d="${clip}"/></clipPath>`;
+  d += '</defs>';
+  let bg = `<rect width="${w}" height="${h}" fill="${PAGE.BG}"/><rect width="${w}" height="${h}" fill="url(#${id}-pd)" opacity=".5"/>`;
+  for (const [gx, gy, gr, gc] of glows) {
+    const cx = gx - x0, cy = gy - y0;
+    if (cy + gr < 0 || cy - gr > h || cx + gr < 0 || cx - gr > w) continue;
+    bg += `<circle cx="${cx}" cy="${cy}" r="${gr}" fill="url(#${id}-g${gc})"/>`;
+  }
+  // falling light streaks — the page's "background video"
+  const rnd = rng(seed);
+  for (let i = 0; i < streaks; i++) {
+    const sx = (60 + rnd() * (PAGE.W - 120) - x0).toFixed(0); const len = 90 + rnd() * 90; const dur = ((h + len) / (55 + rnd() * 50)).toFixed(2);
+    if (sx < 4 || sx > w - 4) continue;
+    bg += `<rect x="${sx}" y="${-len}" width="1.4" height="${len.toFixed(0)}" fill="url(#${id}-sk)"><animate attributeName="y" values="${-len};${h}" dur="${dur}s" begin="-${(rnd() * dur).toFixed(2)}s" repeatCount="indefinite"/></rect>`;
+  }
+  let rl = '';
+  if (rail && x0 === 0) {
+    const to = railTo ?? h;
+    rl += `<path d="M${PAGE.RAIL} ${railFrom}V${to}" stroke="url(#${id}-rl)" stroke-width="2"/>`;
+    rl += packet(`M${PAGE.RAIL} ${railFrom - 30}V${to}`, { dur: ((to - railFrom + 30) / 110).toFixed(2), color: C.cyan, r: 2.6 });
+    const n = node == null ? [] : [].concat(node);
+    for (const ny of n) {
+      rl += `<path d="M${PAGE.RAIL} ${ny}H${PAGE.M - 4}" stroke="${C.cyan}" stroke-opacity=".6"/>`;
+      rl += `<rect x="${PAGE.RAIL - 6}" y="${ny - 6}" width="12" height="12" transform="rotate(45 ${PAGE.RAIL} ${ny})" fill="${PAGE.BG}" stroke="${C.cyan}" stroke-width="1.5"/>`;
+      rl += led(PAGE.RAIL, ny, C.cyan, 2.6);
+    }
+  }
+  const inner = `<g${clip ? ` clip-path="url(#${id}-clip)"` : ''}>${bg}${rl}${body}</g>`;
+  return svg(w, h, d + inner, { title, desc });
+}

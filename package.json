@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node scripts/build-assets.mjs",
     "stats": "node scripts/stats.mjs",
-    "stats:fixture": "node scripts/stats.mjs --fixture scripts/fixtures/sample.json --out preview/stats.svg"
+    "stats:fixture": "node scripts/stats.mjs --fixture scripts/fixtures/sample.json --out preview/stats.svg",
+    "snake:frame": "node scripts/snake-strip.mjs"
   },
   "devDependencies": {
     "simple-icons": "13.21.0"

@@ -1,41 +1,26 @@
 <!--
-  SANKET.SYS — profile v2
-  Every visual on this page is a hand-built SVG generated from one design system:
-  scripts/design.mjs (tokens) → scripts/build-assets.mjs (static art) → assets/
-  scripts/stats.mjs + .github/workflows/profile.yml (live telemetry + snake) → `output` branch
+  SANKET.SYS — the page is a stack of SVG strips that share one background,
+  grid and spine, so it renders as a single continuous surface.
+  scripts/design.mjs → scripts/build-assets.mjs → assets/  ·  live strips: .github/workflows/profile.yml
+  Keep this block free of blank lines: it must stay one HTML block.
 -->
-
-<div align="center">
-
-<a href="https://portfolio.sanketmali.dev"><img src="assets/hero.svg" width="100%" alt="Sanket Mali — Full-Stack Engineer. MERN, AWS Cloud, DevOps, Distributed Systems and AI."></a>
-
-<a href="https://www.linkedin.com/in/sanket-mali-4a40122b7"><img src="assets/link-linkedin.svg" height="40" alt="LinkedIn"></a>
-<a href="mailto:sanketmali0909@gmail.com"><img src="assets/link-email.svg" height="40" alt="Email: sanketmali0909@gmail.com"></a>
-<a href="https://portfolio.sanketmali.dev"><img src="assets/link-portfolio.svg" height="40" alt="Portfolio: portfolio.sanketmali.dev"></a>
-<a href="https://ieeexplore.ieee.org/abstract/document/11400349"><img src="assets/link-paper.svg" height="40" alt="IEEE DELCON 2025 paper"></a>
-
-<br>
-
-<!-- ─────────────────────────────── 01 · whoami ─────────────────────────────── -->
-
-<img src="assets/section-01.svg" width="100%" alt="01 — whoami">
-
-<a href="https://ieeexplore.ieee.org/abstract/document/11400349"><img src="assets/about.svg" width="100%" alt="I engineer full-stack systems and the cloud they run on. B.Tech Computer Science at NMIMS MPSTME (2023–2027), CGPA 3.47 / 4.00. Published at IEEE DELCON 2025. Focus: MERN, AWS, DevOps & distributed systems, AI & automation. Learning: system design, distributed systems, cloud computing."></a>
-
-<br>
-
-<!-- ─────────────────────────────── 02 · work ─────────────────────────────── -->
-
-<img src="assets/section-02.svg" width="100%" alt="02 — Selected work">
-
-<a href="https://github.com/Sanket1516/Smart-Campus-Monitoring-System"><img src="assets/project-smart-campus.svg" width="100%" alt="Smart Campus Entry Monitoring System — MERN platform with biometric terminal sync, Socket.IO live dashboards, RBAC and CI/CD to AWS ECS Fargate."></a>
-
-<a href="https://github.com/Sanket1516/Smart-Form-autofilling"><img src="assets/project-smart-form.svg" width="61.5%" alt="Smart Form Auto-Filling — FastAPI, LangGraph and ChromaDB with a Chrome MV3 extension; fills forms only after user approval."></a><a href="https://github.com/Sanket1516/Packet_analyzer"><img src="assets/project-dpi.svg" width="38.45%" alt="DPI Engine — multi-threaded C++17 deep packet inspection with TLS SNI extraction."></a>
-
-<a href="https://github.com/Sanket1516/metromind-ai-dms"><img src="assets/project-metromind.svg" width="38.45%" alt="MetroMind AI DMS — API gateway in front of 13 FastAPI services: OCR, AI analysis, semantic search, workflows."></a><a href="https://github.com/Sanket1516/Cyber-Sec-Project"><img src="assets/project-passguard.svg" width="61.5%" alt="PassGuard — entropy-based password scoring and live attack simulation over WebSockets."></a>
-
-<a href="https://github.com/Sanket1516/Wanderlust-master"><img src="assets/project-wanderlust.svg" width="100%" alt="Wanderlust — Airbnb-style stay booking platform with Mapbox, Cloudinary, Razorpay and AI helpers."></a>
-
+<div>
+<a href="https://portfolio.sanketmali.dev"><img src="assets/hero.svg" width="100%" align="top" alt="Sanket Mali — Full-Stack Engineer. MERN, AWS Cloud, DevOps, Distributed Systems and AI."></a>
+<a href="https://www.linkedin.com/in/sanket-mali-4a40122b7"><img src="assets/link-linkedin.svg" width="24.99%" align="top" alt="LinkedIn"></a><a href="mailto:sanketmali0909@gmail.com"><img src="assets/link-email.svg" width="24.99%" align="top" alt="Email: sanketmali0909@gmail.com"></a><a href="https://portfolio.sanketmali.dev"><img src="assets/link-portfolio.svg" width="24.99%" align="top" alt="Portfolio"></a><a href="https://ieeexplore.ieee.org/abstract/document/11400349"><img src="assets/link-paper.svg" width="24.99%" align="top" alt="IEEE DELCON 2025 paper"></a>
+<img src="assets/head-01.svg" width="100%" align="top" alt="01 — whoami">
+<a href="https://ieeexplore.ieee.org/abstract/document/11400349"><img src="assets/about.svg" width="100%" align="top" alt="I engineer full-stack systems and the cloud they run on. B.Tech Computer Science at NMIMS MPSTME (2023–2027), CGPA 3.47 / 4.00. Published at IEEE DELCON 2025. Focus: MERN, AWS, DevOps and distributed systems, AI and automation."></a>
+<img src="assets/head-02.svg" width="100%" align="top" alt="02 — Selected work">
+<a href="https://github.com/Sanket1516/Smart-Campus-Monitoring-System"><img src="assets/project-smart-campus.svg" width="100%" align="top" alt="Smart Campus Entry Monitoring System — MERN platform with biometric terminal sync, Socket.IO live dashboards, RBAC and CI/CD to AWS ECS Fargate."></a>
+<a href="https://github.com/Sanket1516/Smart-Form-autofilling"><img src="assets/project-smart-form.svg" width="60.59%" align="top" alt="Smart Form Auto-Filling — FastAPI, LangGraph and ChromaDB with a Chrome MV3 extension; fills forms only after user approval."></a><a href="https://github.com/Sanket1516/Packet_analyzer"><img src="assets/project-dpi.svg" width="39.4%" align="top" alt="DPI Engine — multi-threaded C++17 deep packet inspection with TLS SNI extraction."></a>
+<a href="https://github.com/Sanket1516/metromind-ai-dms"><img src="assets/project-metromind.svg" width="39.4%" align="top" alt="MetroMind AI DMS — API gateway in front of 13 FastAPI services."></a><a href="https://github.com/Sanket1516/Cyber-Sec-Project"><img src="assets/project-passguard.svg" width="60.59%" align="top" alt="PassGuard — entropy-based password scoring and live attack simulation over WebSockets."></a>
+<a href="https://github.com/Sanket1516/Wanderlust-master"><img src="assets/project-wanderlust.svg" width="100%" align="top" alt="Wanderlust — Airbnb-style stay booking platform with Mapbox, Cloudinary, Razorpay and AI helpers."></a>
+<img src="assets/head-03.svg" width="100%" align="top" alt="03 — Technology ecosystem">
+<img src="assets/stack.svg" width="100%" align="top" alt="Languages: C++, Python, JavaScript, TypeScript, Java, SQL. Frontend: React, Vite, Tailwind, Material UI, Bootstrap, EJS, Chart.js. Backend: Node.js, Express, FastAPI, Flask, Socket.IO, JWT, Passport. Databases: MongoDB, PostgreSQL, MySQL, Redis, PL/SQL, ChromaDB. Cloud: AWS, Fargate, ECS/ECR, EC2, S3, DynamoDB, IAM, Linux. DevOps: GitHub Actions, Docker, Nginx, Prometheus, Grafana, Celery. AI/ML: LangGraph, Transformers, embeddings, OpenCV, spaCy, Gemini. Tools: Git, GitHub, Bash, pytest, Vitest, Playwright, Wireshark, Power BI.">
+<img src="assets/head-04.svg" width="100%" align="top" alt="04 — Telemetry">
+<img src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/stats.svg" width="100%" align="top" alt="Live GitHub telemetry: contributions, streaks, stars, followers, repositories, languages, contribution calendar and weekly activity.">
+<img src="assets/head-05.svg" width="100%" align="top" alt="05 — Signal trace">
+<img src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/snake.svg" width="100%" align="top" alt="Animated snake eating the contribution graph">
+<a href="https://portfolio.sanketmali.dev"><img src="assets/footer.svg" width="100%" align="top" alt="Signed — Sanket Mali. Thanks for stopping by."></a>
 </div>
 
 <details>
@@ -81,45 +66,7 @@
 
 </details>
 
-<div align="center">
-
-<br>
-
-<!-- ─────────────────────────────── 03 · stack ─────────────────────────────── -->
-
-<img src="assets/section-03.svg" width="100%" alt="03 — Technology ecosystem">
-
-<img src="assets/stack.svg" width="100%" alt="Languages: C++, Python, JavaScript, TypeScript, Java, SQL. Frontend: React, Vite, Tailwind, Material UI, Bootstrap, EJS, Chart.js. Backend: Node.js, Express, FastAPI, Flask, Socket.IO, JWT, Passport. Databases: MongoDB, PostgreSQL, MySQL, Redis, PL/SQL, ChromaDB. Cloud: AWS, Fargate, ECS/ECR, EC2, S3, DynamoDB, IAM, Linux. DevOps: GitHub Actions, Docker, Nginx, Prometheus, Grafana, Celery. AI/ML: LangGraph, Transformers, embeddings, OpenCV, spaCy, Gemini. Tools: Git, GitHub, Bash, pytest, Vitest, Playwright, Wireshark, Power BI.">
-
-<br>
-
-<!-- ─────────────────────────────── 04 · telemetry ─────────────────────────────── -->
-
-<img src="assets/section-04.svg" width="100%" alt="04 — Telemetry">
-
-<img src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/stats.svg" width="100%" alt="Live GitHub telemetry: contributions, streaks, stars, followers, repositories, languages, contribution calendar and weekly activity. Rebuilt every 12 hours by GitHub Actions.">
-
-<br>
-
-<!-- ─────────────────────────────── 05 · snake ─────────────────────────────── -->
-
-<img src="assets/section-05.svg" width="100%" alt="05 — Signal trace">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/snake-light.svg">
-  <img src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/snake-dark.svg" width="100%" alt="Animated snake eating the contribution graph">
-</picture>
-
-<br><br>
-
-<img src="assets/divider.svg" width="100%" alt="">
-
-<a href="https://portfolio.sanketmali.dev"><img src="assets/footer.svg" width="100%" alt="Signed — Sanket Mali. Thanks for stopping by."></a>
-
-<img src="https://komarev.com/ghpvc/?username=Sanket1516&label=VISITORS&color=8B5CF6&style=flat-square&abbreviated=true" alt="Profile visitors">
-
-</div>
+<p align="center"><img src="https://komarev.com/ghpvc/?username=Sanket1516&label=VISITORS&color=8B5CF6&style=flat-square&abbreviated=true" alt="Profile visitors"></p>
 
 <details>
 <summary><sub><b>How this profile is built</b> · no templates, no third-party stat cards</sub></summary>
@@ -130,8 +77,8 @@
 | [`scripts/design.mjs`](scripts/design.mjs) | The **SIGNAL** design system as code: palette, type scale, card borders with registration ticks, motion tempo, packet and LED primitives. |
 | [`scripts/build-assets.mjs`](scripts/build-assets.mjs) | Generates every static SVG in [`assets/`](assets): hero, bento cards, architecture diagrams and the tech map. Icons from `simple-icons` are inlined. |
 | [`scripts/stats.mjs`](scripts/stats.mjs) | Queries the GitHub GraphQL API and renders the telemetry dashboard: streaks, calendar, languages and weekly activity. |
-| [`profile.yml`](.github/workflows/profile.yml) | Every 12 hours, renders the dashboard and the snake, validates them, and publishes them to the `output` branch. A failed run publishes nothing, so the last good images stay up. |
+| [`profile.yml`](.github/workflows/profile.yml) | Every 12 hours, renders the dashboard and the snake, frames them as page strips, validates them, and publishes them to the `output` branch. A failed run publishes nothing, so the last good images stay up. |
 
-Animation is pure SVG and SMIL (no JavaScript), so it renders inside GitHub's image sandbox. Rebuild locally with `npm install && npm run build`.
+The page is a stack of SVG strips placed edge to edge. They share one background, dot grid, light and spine, so the joins don't show. Animation is pure SVG and SMIL (no JavaScript), so it renders inside GitHub's image sandbox. Rebuild locally with `npm install && npm run build`.
 
 </details>
