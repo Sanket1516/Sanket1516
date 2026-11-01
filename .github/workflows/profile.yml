@@ -13,6 +13,8 @@ on:
     paths:
       - "scripts/stats.mjs"
       - "scripts/design.mjs"
+      - "scripts/snake-strip.mjs"
+      - "assets/layout.json"
       - ".github/workflows/profile.yml"
 
 permissions:
@@ -48,9 +50,12 @@ jobs:
             dist/snake-dark.svg?palette=github-dark&color_snake=#22D3EE&color_dots=#121826,#0E3A4A,#13708A,#2A8BF2,#8B5CF6
             dist/snake-light.svg?palette=github-light&color_snake=#7C3AED&color_dots=#EBEDF2,#B9ECF7,#5CC8E6,#4F86F0,#7C3AED
 
+      - name: Frame snake as a page strip
+        run: node scripts/snake-strip.mjs dist/snake-dark.svg dist/snake.svg
+
       - name: Validate output
         run: |
-          for f in dist/stats.svg dist/snake-dark.svg dist/snake-light.svg; do
+          for f in dist/stats.svg dist/snake.svg dist/snake-dark.svg dist/snake-light.svg; do
             test -s "$f" || { echo "::error::$f is missing or empty"; exit 1; }
             grep -q "<svg" "$f" || { echo "::error::$f is not an SVG"; exit 1; }
           done

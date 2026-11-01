@@ -1,20 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="280" height="68" viewBox="0 0 280 68" fill="none" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="96" viewBox="0 0 300 96" fill="none" role="img" aria-labelledby="t d">
 <title id="t">Email</title><desc id="d">SANKETMALI0909</desc>
 <defs>
-  <linearGradient id="lmail-brand" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox" spreadMethod="reflect">
+  <pattern id="pg-pd" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="translate(-12 0)"><circle cx="1" cy="1" r="1" fill="#252D40"/></pattern>
+  <radialGradient id="pg-gc"><stop offset="0" stop-color="#22D3EE" stop-opacity=".16"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
+  <radialGradient id="pg-gv"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".2"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="pg-gb"><stop offset="0" stop-color="#3B82F6" stop-opacity=".16"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
+  <linearGradient id="pg-sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22D3EE" stop-opacity="0"/><stop offset=".85" stop-color="#22D3EE" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient>
+  <linearGradient id="pg-rl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22D3EE" stop-opacity=".8"/><stop offset=".5" stop-color="#3B82F6" stop-opacity=".7"/><stop offset="1" stop-color="#8B5CF6" stop-opacity=".8"/></linearGradient></defs><g><rect width="300" height="96" fill="#05060A"/><rect width="300" height="96" fill="url(#pg-pd)" opacity=".5"/><circle cx="-390" cy="376" r="540" fill="url(#pg-gc)"/><defs>
+  <linearGradient id="c1-brand" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox" spreadMethod="reflect">
     <stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#3B82F6"/><stop offset="1" stop-color="#8B5CF6"/>
   </linearGradient>
-  <linearGradient id="lmail-brandv" x1="0" y1="0" x2="0" y2="1">
+  <linearGradient id="c1-brandv" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/>
   </linearGradient>
-  <linearGradient id="lmail-edge" x1="0" y1="0" x2="1" y2="1">
+  <linearGradient id="c1-edge" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#22D3EE" stop-opacity=".55"/><stop offset=".35" stop-color="#252D40" stop-opacity=".9"/>
     <stop offset=".7" stop-color="#1A2030"/><stop offset="1" stop-color="#8B5CF6" stop-opacity=".5"/>
   </linearGradient>
-  <radialGradient id="lmail-glowc" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
-  <radialGradient id="lmail-glowv" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
-  <radialGradient id="lmail-glowb" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3B82F6" stop-opacity=".2"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
-  <pattern id="lmail-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#252D40"/></pattern>
-  <pattern id="lmail-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#1A2030" stroke-width="1"/></pattern>
-</defs><rect x="0.5" y="0.5" width="279" height="67" rx="18" fill="#0A0D14" stroke="url(#lmail-edge)"/><rect x="14.5" y="14.5" width="39" height="39" rx="11" fill="#0F131D" stroke="#252D40"/><g transform="translate(23 23) scale(0.9166666666666666)" color="#EEF2F8"><rect x="2" y="5" width="20" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 7 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="68" y="32" font-family="'Segoe UI Variable Display','Segoe UI',Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="0" fill="#EEF2F8" text-anchor="start">Email</text><text x="68" y="52" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="11.5" font-weight="500" letter-spacing="1" fill="#667089" text-anchor="start">SANKETMALI0909</text><text x="258" y="42" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="18" fill="#22D3EE" text-anchor="end">↗</text>
+  <radialGradient id="c1-glowc" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
+  <radialGradient id="c1-glowv" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="c1-glowb" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3B82F6" stop-opacity=".2"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
+  <pattern id="c1-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#252D40"/></pattern>
+  <pattern id="c1-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#1A2030" stroke-width="1"/></pattern>
+</defs><rect x="32.5" y="16.5" width="251" height="63" rx="16" fill="#0A0D14" stroke="url(#c1-edge)"/><rect x="44.5" y="28.5" width="39" height="39" rx="11" fill="#0F131D" stroke="#252D40"/><g transform="translate(53 37) scale(0.9166666666666666)" color="#EEF2F8"><rect x="2" y="5" width="20" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 7 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="98" y="46" font-family="'Segoe UI Variable Display','Segoe UI',Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="0" fill="#EEF2F8" text-anchor="start">Email</text><text x="98" y="65" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="11" font-weight="500" letter-spacing="1" fill="#667089" text-anchor="start">SANKETMALI0909</text><text x="266" y="56" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="18" fill="#22D3EE" text-anchor="end">↗</text></g>
 </svg>

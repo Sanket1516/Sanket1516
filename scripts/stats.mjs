@@ -6,7 +6,7 @@
 //   node scripts/stats.mjs --fixture scripts/fixtures/sample.json --out preview/stats.svg
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { C, FONT, svg, defs, card, label, text, led } from './design.mjs';
+import { C, FONT, svg, defs, card, label, text, led, PAGE, nest, strip } from './design.mjs';
 
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i > -1 ? process.argv[i + 1] : d; };
 const USER = arg('user', process.env.GITHUB_USER || 'Sanket1516');
@@ -191,7 +191,13 @@ function render(s) {
 const data = FIXTURE ? JSON.parse(readFileSync(FIXTURE, 'utf8')) : await fetchData(USER);
 if (!FIXTURE && !data.days.length) throw new Error('No contribution data returned — refusing to publish an empty dashboard');
 const today = FIXTURE ? new Date(data.today + 'T12:00:00Z') : new Date();
-const out = render(derive(data, today));
+const inner = render(derive(data, today));
+// Frame the dashboard as one strip of the page (same background, grid and
+// spine as the static assets) using the layout written by build-assets.
+const layout = JSON.parse(readFileSync(new URL('../assets/layout.json', import.meta.url), 'utf8'));
+const n = nest(inner, PAGE.M, 0, PAGE.W - 2 * PAGE.M);
+const out = strip({ y0: layout.stats.y, h: layout.stats.h, glows: layout.glows, seed: 41, body: n.el,
+  title: inner.match(/<title id="t">([\s\S]*?)<\/title>/)[1], desc: inner.match(/<desc id="d">([\s\S]*?)<\/desc>/)[1] });
 mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(OUT, out);
 console.log(`wrote ${OUT} (${(Buffer.byteLength(out) / 1024).toFixed(1)} kB)`);
