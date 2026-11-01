@@ -109,7 +109,7 @@ function render(s) {
     ['CONTRIBUTIONS', fmt(s.total), 'all-time · public'],
     ['CURRENT STREAK', `${s.current.len}d`, s.current.len ? `${short(s.current.start)} → today` : 'next commit starts it'],
     ['LONGEST STREAK', `${s.longest.len}d`, s.longest.len ? `${short(s.longest.start)} → ${short(s.longest.end)}` : '—'],
-    ['STARS EARNED', fmt(s.stars), `${fmt(s.forks)} forks`],
+    ['STARS EARNED', fmt(s.stars), `${fmt(s.forks)} fork${s.forks === 1 ? '' : 's'}`],
     ['FOLLOWERS', fmt(s.followers), 'say hi →'],
     ['PUBLIC REPOS', fmt(s.repos), 'and counting'],
   ];
@@ -176,7 +176,9 @@ function render(s) {
   b += `<path d="${line}" stroke="url(#${p}-brand)" stroke-width="2.4" stroke-linejoin="round" stroke-dasharray="4000" stroke-dashoffset="4000"><animate attributeName="stroke-dashoffset" from="4000" to="0" dur="3s" fill="freeze"/></path>`;
   const peakI = weekly.indexOf(wmax); const [pkx, pky] = pts[peakI];
   b += `<circle cx="${pkx.toFixed(1)}" cy="${pky.toFixed(1)}" r="4.5" fill="${C.text}"/><circle cx="${pkx.toFixed(1)}" cy="${pky.toFixed(1)}" r="10" stroke="${C.cyan}" opacity=".6"/>`;
-  b += label(Math.min(pkx + 16, W - 220), Math.max(pky + 4, py + 10), `PEAK · ${wmax} / WEEK OF ${short(s.weeks[peakI][0].date)}`, { size: 11.5, color: C.dim, spacing: 1 });
+  const peakTxt = `PEAK · ${wmax} / WEEK OF ${short(s.weeks[peakI][0].date)}`;
+  const flip = pkx > W - 320; // near the right edge: put the label on the left of the point
+  b += label(flip ? pkx - 18 : pkx + 18, Math.max(pky + 4, py + 10), peakTxt, { size: 11.5, color: C.dim, spacing: 1, anchor: flip ? 'end' : 'start' });
   const [lx, lyy] = pts[pts.length - 1];
   b += led(lx, lyy, C.cyan, 3.5);
   b += label(px, AY + AH - 18, short(s.weeks[0][0].date), { size: 11, spacing: 1 });
