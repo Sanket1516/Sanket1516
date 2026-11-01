@@ -1,204 +1,137 @@
+<!--
+  SANKET.SYS — profile v2
+  Every visual on this page is a hand-built SVG generated from one design system:
+  scripts/design.mjs (tokens) → scripts/build-assets.mjs (static art) → assets/
+  scripts/stats.mjs + .github/workflows/profile.yml (live telemetry + snake) → `output` branch
+-->
+
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,50:302b63,100:24243e&height=200&section=header&text=Welcome%20to%20my%20profile!&fontSize=40&fontColor=00F0FF&animation=twinkling&fontAlignY=40" width="100%"/>
+<a href="https://portfolio.sanketmali.dev"><img src="assets/hero.svg" width="100%" alt="Sanket Mali — Full-Stack Engineer. MERN, AWS Cloud, DevOps, Distributed Systems and AI."></a>
 
-<img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="45">
+<a href="https://www.linkedin.com/in/sanket-mali-4a40122b7"><img src="assets/link-linkedin.svg" height="40" alt="LinkedIn"></a>
+<a href="mailto:sanketmali0909@gmail.com"><img src="assets/link-email.svg" height="40" alt="Email: sanketmali0909@gmail.com"></a>
+<a href="https://portfolio.sanketmali.dev"><img src="assets/link-portfolio.svg" height="40" alt="Portfolio: portfolio.sanketmali.dev"></a>
+<a href="https://ieeexplore.ieee.org/abstract/document/11400349"><img src="assets/link-paper.svg" height="40" alt="IEEE DELCON 2025 paper"></a>
 
-# Hi, I'm Sanket Mali
+<br>
 
-### Full Stack Developer • MERN Stack • AWS Cloud Enthusiast
+<!-- ─────────────────────────────── 01 · whoami ─────────────────────────────── -->
 
-![Looking for help with](https://img.shields.io/badge/LOOKING%20FOR%20HELP%20WITH-505050?style=for-the-badge)
-![Smart Campus System](https://img.shields.io/badge/SMART%20CAMPUS%20SYSTEM-00F0FF?style=for-the-badge&logoColor=black)
+<img src="assets/section-01.svg" width="100%" alt="01 — whoami">
+
+<a href="https://ieeexplore.ieee.org/abstract/document/11400349"><img src="assets/about.svg" width="100%" alt="I engineer full-stack systems and the cloud they run on. B.Tech Computer Science at NMIMS MPSTME (2023–2027), CGPA 3.47 / 4.00. Published at IEEE DELCON 2025. Focus: MERN, AWS, DevOps & distributed systems, AI & automation. Learning: system design, distributed systems, cloud computing."></a>
+
+<br>
+
+<!-- ─────────────────────────────── 02 · work ─────────────────────────────── -->
+
+<img src="assets/section-02.svg" width="100%" alt="02 — Selected work">
+
+<a href="https://github.com/Sanket1516/Smart-Campus-Monitoring-System"><img src="assets/project-smart-campus.svg" width="100%" alt="Smart Campus Entry Monitoring System — MERN platform with biometric terminal sync, Socket.IO live dashboards, RBAC and CI/CD to AWS ECS Fargate."></a>
+
+<a href="https://github.com/Sanket1516/Smart-Form-autofilling"><img src="assets/project-smart-form.svg" width="61.5%" alt="Smart Form Auto-Filling — FastAPI, LangGraph and ChromaDB with a Chrome MV3 extension; fills forms only after user approval."></a><a href="https://github.com/Sanket1516/Packet_analyzer"><img src="assets/project-dpi.svg" width="38.45%" alt="DPI Engine — multi-threaded C++17 deep packet inspection with TLS SNI extraction."></a>
+
+<a href="https://github.com/Sanket1516/metromind-ai-dms"><img src="assets/project-metromind.svg" width="38.45%" alt="MetroMind AI DMS — API gateway in front of 13 FastAPI services: OCR, AI analysis, semantic search, workflows."></a><a href="https://github.com/Sanket1516/Cyber-Sec-Project"><img src="assets/project-passguard.svg" width="61.5%" alt="PassGuard — entropy-based password scoring and live attack simulation over WebSockets."></a>
+
+<a href="https://github.com/Sanket1516/Wanderlust-master"><img src="assets/project-wanderlust.svg" width="100%" alt="Wanderlust — Airbnb-style stay booking platform with Mapbox, Cloudinary, Razorpay and AI helpers."></a>
 
 </div>
 
-<br/>
+<details>
+<summary><b>Engineering notes</b> &nbsp;·&nbsp; architecture and implementation details for every project above</summary>
+<br>
 
-## 📌 About Me
+**[Smart Campus Entry Monitoring System](https://github.com/Sanket1516/Smart-Campus-Monitoring-System)** &nbsp;`React 18` `Vite` `Node.js` `Express` `MongoDB` `Socket.IO` `JWT` `Tailwind` `Chart.js` `Docker` `AWS ECS Fargate`
+- Biometric terminals (eSSL X990, ADMS push) post authenticated scan events; SAP ID entry at the gate desk is the manual fallback.
+- One scan endpoint decides **entry → exit → re-entry** from each student's state for the day; unknown IDs are logged as unauthorized attempts.
+- Hosteller tracking with curfew-violation flags, warden-approved exit windows and live terminal heartbeat.
+- RBAC across `admin` · `security` · `warden`; Helmet, rate limiting and request validation on the API.
+- Parent notifications by email (Nodemailer) and SMS (Fast2SMS), dispatched fire-and-forget so scans never block.
+- Dockerised frontend (Nginx) and backend; GitHub Actions builds to Amazon ECR and rolls out to ECS Fargate behind an ALB.
 
-- 🎓 I'm a **B.Tech Computer Science** student at **NMIMS MPSTME** (2023 – 2027), CGPA **3.47/4.00**
-- 🌱 I'm currently learning **System Design, Distributed Systems & Cloud Computing**
-- 💬 Ask me about **MERN Stack, AWS, and Linux**
-- 📫 How to reach me: [sanketmali0909@gmail.com](mailto:sanketmali0909@gmail.com)
-- 💼 Check out my work at my [Portfolio](https://portfolio.sanketmali.dev)
-- 📄 I published a research paper at **IEEE DELCON 2025** — [Read it here](https://ieeexplore.ieee.org/abstract/document/11400349)
-- ⚡ Fun fact: I turn coffee ☕ into scalable, cloud-native applications
+**[Smart Form Auto-Filling System](https://github.com/Sanket1516/Smart-Form-autofilling)** &nbsp;`FastAPI` `MongoDB` `ChromaDB` `LangGraph` `RapidOCR` `Celery` `Redis` `React 19` `Chrome MV3`
+- Extracts facts from the user's own documents with page-level evidence, confidence and origin; conflicts are surfaced for review.
+- Deterministic rules run first; an optional LLM (Gemini / OpenAI / Anthropic / Ollama) only fills gaps, and its output is schema-validated.
+- "Ask Documents": retrieval over a ChromaDB index with cited sources.
+- A Manifest V3 extension detects form fields, recommends values, fills only approved fields, re-reads the DOM to verify, and **never submits**.
+- Tested with pytest, Vitest and Playwright.
 
-<br/>
+**[DPI Engine](https://github.com/Sanket1516/Packet_analyzer)** &nbsp;`C++17` `multithreading` `PCAP` `TLS`
+- Parses Ethernet → IPv4 → TCP/UDP from PCAP captures and extracts the domain from TLS ClientHello SNI or the HTTP Host header.
+- Multi-threaded pipeline: reader → load-balancer threads → fast-path threads → writer, using consistent hashing on the 5-tuple so each flow stays on one thread.
+- Rule-based blocking by app, domain or IP; writes filtered PCAPs and a traffic report.
 
-## 🌐 Connect With Me
+**[MetroMind AI DMS](https://github.com/Sanket1516/metromind-ai-dms)** &nbsp;`FastAPI` `PostgreSQL` `Redis` `FAISS` `ChromaDB` `React` `TypeScript` `Docker` `Prometheus` `Grafana`
+- An API gateway in front of independently structured services for auth, documents, OCR, AI/ML, search, notifications, integrations, analytics, tasks, workflows, security, backup and reporting.
+- OCR (Tesseract / EasyOCR / OpenCV), Transformer-based analysis, and semantic search on sentence-transformer embeddings.
+- WebSocket notifications, JWT and role-based access, and observability through Prometheus and Grafana.
 
-<div align="center">
+**[PassGuard](https://github.com/Sanket1516/Cyber-Sec-Project)** &nbsp;`Flask-SocketIO` `MongoDB` `React 19` `Recharts` `Tailwind 4` `Framer Motion`
+- Entropy scoring (`H = L × log₂(N)`) plus pattern detection for keyboard walks, sequences, dates and leetspeak.
+- Dictionary attack against the RockYou dataset (~14M entries), a hybrid attack (~230 mutations per word) and a brute-force estimate, run in that order.
+- Progress streams live into per-session Socket.IO rooms, with crack-time estimates for CPU, GPU and GPU-cluster tiers.
 
-[![LinkedIn](https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sanket-mali-4a40122b7)
-[![GitHub](https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sanket1516)
-[![Gmail](https://img.shields.io/badge/GMAIL-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sanketmali0909@gmail.com)
-[![Portfolio](https://img.shields.io/badge/PORTFOLIO-00F0FF?style=for-the-badge&logo=vercel&logoColor=black)](https://portfolio.sanketmali.dev)
+**[Wanderlust](https://github.com/Sanket1516/Wanderlust-master)** &nbsp;`Node.js` `Express` `MongoDB` `EJS` `Passport` `Cloudinary` `Mapbox` `Razorpay` `Nodemailer`
+- An MVC monolith covering listings, search, filters, pagination, wishlists, bookings, reviews, host–guest messaging and an admin dashboard.
+- Razorpay order creation with payment verification; Mapbox geocoding; Cloudinary image uploads.
+- AI-generated listing descriptions, review summaries and a listing-aware travel chatbot (Cohere, Groq).
 
-</div>
+**Also shipped:** an employee directory deployed on AWS (EC2, ALB, Auto Scaling, IAM, S3, DynamoDB, VPC), and a quiz portal built during my Technook internship (JavaScript, Hyperlambda, MySQL).
 
-<br/>
-
-## 💻 Tech Stack
-
-**Programming Languages**
-
-<div align="center">
-
-![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
-![Java](https://img.shields.io/badge/JAVA-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Python](https://img.shields.io/badge/PYTHON-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-
-</div>
-
-**Frontend**
-
-<div align="center">
-
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![React](https://img.shields.io/badge/REACT-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TailwindCSS](https://img.shields.io/badge/TAILWIND%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/BOOTSTRAP-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
-![EJS](https://img.shields.io/badge/EJS-90A93A?style=for-the-badge&logo=javascript&logoColor=white)
-
-</div>
-
-**Backend**
+</details>
 
 <div align="center">
 
-![Node.js](https://img.shields.io/badge/NODE.JS-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/EXPRESS.JS-000000?style=for-the-badge&logo=express&logoColor=white)
-![Socket.IO](https://img.shields.io/badge/SOCKET.IO-010101?style=for-the-badge&logo=socketdotio&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+<br>
 
-</div>
+<!-- ─────────────────────────────── 03 · stack ─────────────────────────────── -->
 
-**Databases**
+<img src="assets/section-03.svg" width="100%" alt="03 — Technology ecosystem">
 
-<div align="center">
+<img src="assets/stack.svg" width="100%" alt="Languages: C++, Python, JavaScript, TypeScript, Java, SQL. Frontend: React, Vite, Tailwind, Material UI, Bootstrap, EJS, Chart.js. Backend: Node.js, Express, FastAPI, Flask, Socket.IO, JWT, Passport. Databases: MongoDB, PostgreSQL, MySQL, Redis, PL/SQL, ChromaDB. Cloud: AWS, Fargate, ECS/ECR, EC2, S3, DynamoDB, IAM, Linux. DevOps: GitHub Actions, Docker, Nginx, Prometheus, Grafana, Celery. AI/ML: LangGraph, Transformers, embeddings, OpenCV, spaCy, Gemini. Tools: Git, GitHub, Bash, pytest, Vitest, Playwright, Wireshark, Power BI.">
 
-![MongoDB](https://img.shields.io/badge/MONGODB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![MySQL](https://img.shields.io/badge/MYSQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![PL/SQL](https://img.shields.io/badge/PL%2FSQL-F80000?style=for-the-badge&logo=oracle&logoColor=white)
+<br>
 
-</div>
+<!-- ─────────────────────────────── 04 · telemetry ─────────────────────────────── -->
 
-**Cloud & Tools**
+<img src="assets/section-04.svg" width="100%" alt="04 — Telemetry">
 
-<div align="center">
+<img src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/stats.svg" width="100%" alt="Live GitHub telemetry: contributions, streaks, stars, followers, repositories, languages, contribution calendar and weekly activity. Rebuilt every 12 hours by GitHub Actions.">
 
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
-![Linux](https://img.shields.io/badge/LINUX-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Bash](https://img.shields.io/badge/BASH-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
-![Git](https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white)
-![MATLAB](https://img.shields.io/badge/MATLAB-0076A8?style=for-the-badge&logo=mathworks&logoColor=white)
-![Power BI](https://img.shields.io/badge/POWER%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+<br>
 
-</div>
+<!-- ─────────────────────────────── 05 · snake ─────────────────────────────── -->
 
-<br/>
-
-## 🚀 Featured Projects
-
-<table width="100%">
-<tr>
-<td width="50%" valign="top">
-
-### 🏫 Smart Campus Entry Monitoring System
-Full-stack MERN platform automating student entry/exit with biometric & SAP ID authentication, real-time monitoring, and role-based access control.
-
-`React` `Node.js` `Express` `MongoDB` `JWT` `Socket.IO` `TailwindCSS` `Chart.js`
-
-</td>
-<td width="50%" valign="top">
-
-### 🏡 Wanderlust — Airbnb Clone
-Scalable travel booking platform with secure bookings, host management, interactive maps, and payment integration.
-
-`Node.js` `Express` `MongoDB` `Bootstrap` `Passport.js` `Cloudinary` `Mapbox` `Razorpay`
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### ☁️ Employee Directory — Cloud Deployment
-End-to-end AWS cloud deployment demonstrating scalable, secure application hosting with high availability architecture.
-
-`AWS` `EC2` `ALB` `Auto Scaling` `IAM` `S3` `DynamoDB` `VPC`
-
-</td>
-<td width="50%" valign="top">
-
-### 📊 Quiz Portal System — Technook Internship
-Full-stack quiz management portal built during internship with responsive frontend and robust backend workflows.
-
-`HTML` `CSS` `JavaScript` `Hyperlambda` `MySQL`
-
-</td>
-</tr>
-</table>
-
-<br/>
-
-## 🏆 Trophies
-
-<div align="center">
-
-<img src="https://github-profile-trophy.vercel.app/?username=Sanket1516&theme=tokyonight&no-frame=true&row=1&column=7&margin-w=8" width="100%"/>
-
-</div>
-
-<br/>
-
-## 📊 GitHub Stats
-
-<div align="center">
-
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=Sanket1516&theme=tokyonight&hide_border=true&background=0D1117&stroke=00F0FF&ring=8A2BE2&fire=00F0FF)](https://github.com/Sanket1516)
-
-</div>
-
-<br/>
-
-## 📈 More Statistics
-
-<div align="center">
-
-<img src="https://github-readme-stats.vercel.app/api?username=Sanket1516&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00F0FF&icon_color=8A2BE2&text_color=c9d1d9&include_all_commits=true&count_private=true" width="49%"/>
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sanket1516&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00F0FF&text_color=c9d1d9&langs_count=10" width="49%"/>
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Sanket1516&theme=tokyo-night&hide_border=true&bg_color=0D1117&color=00F0FF&line=8A2BE2&point=ffffff" width="100%"/>
-
-</div>
-
-<br/>
-
-## 🐍 GitHub Contribution Snake
-
-<div align="center">
+<img src="assets/section-05.svg" width="100%" alt="05 — Signal trace">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/github-contribution-grid-snake.svg">
-  <img alt="GitHub Contribution Snake" src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/github-contribution-grid-snake.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/snake-light.svg">
+  <img src="https://raw.githubusercontent.com/Sanket1516/Sanket1516/output/snake-dark.svg" width="100%" alt="Animated snake eating the contribution graph">
 </picture>
 
+<br><br>
+
+<img src="assets/divider.svg" width="100%" alt="">
+
+<a href="https://portfolio.sanketmali.dev"><img src="assets/footer.svg" width="100%" alt="Signed — Sanket Mali. Thanks for stopping by."></a>
+
+<img src="https://komarev.com/ghpvc/?username=Sanket1516&label=VISITORS&color=8B5CF6&style=flat-square&abbreviated=true" alt="Profile visitors">
+
 </div>
 
-<br/>
+<details>
+<summary><sub><b>How this profile is built</b> · no templates, no third-party stat cards</sub></summary>
+<br>
 
-<div align="center">
+| Layer | What it does |
+|---|---|
+| [`scripts/design.mjs`](scripts/design.mjs) | The **SIGNAL** design system as code: palette, type scale, card borders with registration ticks, motion tempo, packet and LED primitives. |
+| [`scripts/build-assets.mjs`](scripts/build-assets.mjs) | Generates every static SVG in [`assets/`](assets): hero, bento cards, architecture diagrams and the tech map. Icons from `simple-icons` are inlined. |
+| [`scripts/stats.mjs`](scripts/stats.mjs) | Queries the GitHub GraphQL API and renders the telemetry dashboard: streaks, calendar, languages and weekly activity. |
+| [`profile.yml`](.github/workflows/profile.yml) | Every 12 hours, renders the dashboard and the snake, validates them, and publishes them to the `output` branch. A failed run publishes nothing, so the last good images stay up. |
 
-![Profile Views](https://komarev.com/ghpvc/?username=Sanket1516&label=Profile%20Views&style=for-the-badge&color=8A2BE2)
-![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=Sanket1516.Sanket1516&style=for-the-badge)
+Animation is pure SVG and SMIL (no JavaScript), so it renders inside GitHub's image sandbox. Rebuild locally with `npm install && npm run build`.
 
-</div>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:24243e,50:302b63,100:0f0c29&height=120&section=footer" width="100%"/>
+</details>

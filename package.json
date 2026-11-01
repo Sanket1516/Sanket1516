@@ -1,0 +1,14 @@
+{
+  "name": "sanket1516-profile",
+  "private": true,
+  "type": "module",
+  "description": "Design system + generators behind github.com/Sanket1516",
+  "scripts": {
+    "build": "node scripts/build-assets.mjs",
+    "stats": "node scripts/stats.mjs",
+    "stats:fixture": "node scripts/stats.mjs --fixture scripts/fixtures/sample.json --out preview/stats.svg"
+  },
+  "devDependencies": {
+    "simple-icons": "13.21.0"
+  }
+}
