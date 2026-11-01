@@ -1,0 +1,66 @@
+# Rebuilds the live parts of the profile — telemetry dashboard + contribution
+# snake — and force-publishes them to the `output` branch, which the README
+# reads from. If any step fails, nothing is published and the previous
+# (still valid) images stay live, so the README never shows a broken image.
+name: Profile telemetry
+
+on:
+  schedule:
+    - cron: "17 */12 * * *" # twice a day, off the top of the hour to dodge queue spikes
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/stats.mjs"
+      - "scripts/design.mjs"
+      - ".github/workflows/profile.yml"
+
+permissions:
+  contents: write # only needed to push the generated images to `output`
+
+concurrency:
+  group: profile-telemetry
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Render telemetry dashboard
+        # STATS_TOKEN is optional: a fine-grained PAT (read-only) lets the
+        # dashboard include private contributions. Falls back to GITHUB_TOKEN.
+        env:
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: node scripts/stats.mjs --user "${{ github.repository_owner }}" --out dist/stats.svg
+
+      - name: Render contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake-dark.svg?palette=github-dark&color_snake=#22D3EE&color_dots=#121826,#0E3A4A,#13708A,#2A8BF2,#8B5CF6
+            dist/snake-light.svg?palette=github-light&color_snake=#7C3AED&color_dots=#EBEDF2,#B9ECF7,#5CC8E6,#4F86F0,#7C3AED
+
+      - name: Validate output
+        run: |
+          for f in dist/stats.svg dist/snake-dark.svg dist/snake-light.svg; do
+            test -s "$f" || { echo "::error::$f is missing or empty"; exit 1; }
+            grep -q "<svg" "$f" || { echo "::error::$f is not an SVG"; exit 1; }
+          done
+          ls -la dist
+
+      - name: Publish to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "chore: refresh profile telemetry"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

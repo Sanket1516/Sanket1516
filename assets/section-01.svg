@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="116" viewBox="0 0 1200 116" fill="none" role="img" aria-labelledby="t d">
+<title id="t">01 — whoami</title><desc id="d">$ cat ~/about.md</desc>
+<defs>
+  <linearGradient id="s01-brand" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox" spreadMethod="reflect">
+    <stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#3B82F6"/><stop offset="1" stop-color="#8B5CF6"/>
+  </linearGradient>
+  <linearGradient id="s01-brandv" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/>
+  </linearGradient>
+  <linearGradient id="s01-edge" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#22D3EE" stop-opacity=".55"/><stop offset=".35" stop-color="#252D40" stop-opacity=".9"/>
+    <stop offset=".7" stop-color="#1A2030"/><stop offset="1" stop-color="#8B5CF6" stop-opacity=".5"/>
+  </linearGradient>
+  <radialGradient id="s01-glowc" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
+  <radialGradient id="s01-glowv" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="s01-glowb" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3B82F6" stop-opacity=".2"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
+  <pattern id="s01-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#252D40"/></pattern>
+  <pattern id="s01-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#1A2030" stroke-width="1"/></pattern>
+</defs><rect x="0.5" y="0.5" width="1199" height="115" rx="20" fill="#0A0D14" stroke="url(#s01-edge)"/><text x="40" y="78" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="44" font-weight="700" fill="none" stroke="url(#s01-brand)" stroke-width="1.4" textLength="58" lengthAdjust="spacingAndGlyphs">01</text><path d="M120 30V86" stroke="#252D40"/><text x="146" y="46" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="500" letter-spacing="2.4" fill="#22D3EE" text-anchor="start">SECTION 01</text><text x="144" y="86" font-family="'Segoe UI Variable Display','Segoe UI',Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="750" letter-spacing="0" fill="#EEF2F8" text-anchor="start">whoami</text><text x="1160" y="46" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono','Cascadia Code',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="500" letter-spacing="1" fill="#667089" text-anchor="end">$ cat ~/about.md</text><path d="M560 78H1160" stroke="#252D40" stroke-dasharray="2 6"/><circle cx="560" cy="78" r="3" fill="#0F131D" stroke="#667089"/><circle cx="760" cy="78" r="3" fill="#0F131D" stroke="#667089"/><circle cx="960" cy="78" r="3" fill="#0F131D" stroke="#667089"/><circle cx="1160" cy="78" r="3" fill="#0F131D" stroke="#667089"/><g><rect x="-22" y="-1.2" width="22" height="2.4" rx="1.2" fill="#22D3EE" opacity=".35"/><circle r="3.2" fill="#22D3EE"/><circle r="8.32" fill="#22D3EE" opacity=".16"/><animateMotion dur="5.04s" begin="0s" repeatCount="indefinite" path="M560 78H1160" rotate="auto"/></g><g><rect x="-22" y="-1.2" width="22" height="2.4" rx="1.2" fill="#8B5CF6" opacity=".35"/><circle r="2.4" fill="#8B5CF6"/><circle r="6.24" fill="#8B5CF6" opacity=".16"/><animateMotion dur="5.04s" begin="2.52s" repeatCount="indefinite" path="M560 78H1160" rotate="auto"/></g>
+</svg>
